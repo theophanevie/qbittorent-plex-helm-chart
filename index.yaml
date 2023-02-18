@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  qbittorent-plex:
+  - apiVersion: v2
+    created: "2023-02-18T18:24:30.150908673Z"
+    description: A helm chart to deploy qbittorrent and plex
+    digest: 5239bd9469f3f5e761d0b885e02d2d7e3c07d79b8fba4e69034dab1b91302a8d
+    name: qbittorent-plex
+    type: application
+    urls:
+    - https://github.com/theophanevie/qbittorent-plex-helm-chart/releases/download/qbittorent-plex-0.1.0/qbittorent-plex-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-02-18T18:24:30.150913973Z"
