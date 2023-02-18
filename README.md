@@ -2,7 +2,7 @@
 
 A helm chart to deploy qbittorrent and plex.
 
-:warning: This helm chart assumes that you have configured traefik[1](https://traefik.io/) in your cluster.
+:warning: This helm chart assumes that you have configured traefik[[1]](https://traefik.io/) in your cluster.
 
 ## Why deploy this in a kubernetes cluster ? :sunglasses:
 
@@ -12,13 +12,13 @@ You should also pay attention to the requested cpu value if you want to transcod
 
 ## Why qbittorent and plex are in the same pod ? :male_detective:
 
-In order for plex to access the media uploaded by qbittorent, they must share a pv. However, despite the fact that kubernetes specifies multiple access to a pv[1](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes), Ovh does not implement multiple mounting on multiple nodes[2](https://docs.ovh.com/au/en/kubernetes/setting-up-a-persistent-volume/#access-modes].
+In order for plex to access the media uploaded by qbittorent, they must share a pv. However, despite the fact that kubernetes specifies multiple access to a pv[[1]](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes), Ovh does not implement multiple mounting on multiple nodes[[2]](https://docs.ovh.com/au/en/kubernetes/setting-up-a-persistent-volume/#access-modes).
 
 ## Register plex server :link: 
 
 There is two ways of doing it :
-- Use a claim (/!\ A claim is only valid during 4 minutes)[1](https://www.plex.tv/claim/).
-- Go to your plex host and login[2](https://support.plex.tv/articles/200264746-quick-start-step-by-step-guides/).
+- Use a claim (/!\ A claim is only valid during 4 minutes)[[1]](https://www.plex.tv/claim/).
+- Go to your plex host and login[[2]](https://support.plex.tv/articles/200264746-quick-start-step-by-step-guides/).
 
 If you use the second option, the configuration of the server claim token in the table is not necessary.
 
