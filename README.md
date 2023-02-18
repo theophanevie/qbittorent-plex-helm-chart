@@ -2,40 +2,32 @@
 
 A helm chart to deploy qbittorrent and plex.
 
-/!\ This helm chart assumes that you have configured traefik[1] in your cluster.
+:warning: This helm chart assumes that you have configured traefik[1](https://traefik.io/) in your cluster.
 
-[1] https://traefik.io/
+## Why deploy this in a kubernetes cluster ? :sunglasses:
 
-## Why deploy this in a kubernetes cluster ?
+Why not ? Plex is more for running on a server in a living room, but it works great in kubernetes too. The main limitation is storage, it's not possible to store all the downloaded media (or it will cost you a lot of money). My usage is simply to download, watch, then delete once the movie is watched. In this case, deploying to here works well (even if it's totally over-engineered, but hey, it's cool kubernetes).
 
-Why not? Plex is more for running on a server in a living room, but it works great in kubernetes too. The main limitation is storage, it's not possible to store all the downloaded media (or it will cost you a lot of money). My usage is simply to download, watch, then delete once the movie is watched. In this case, deploying to here works well (even if it's totally over-engineered, but hey, it's cool kubernetes).
 You should also pay attention to the requested cpu value if you want to transcode your media.
 
-## Why qbittorent and plex are in the same pod ? 
+## Why qbittorent and plex are in the same pod ? :male_detective:
 
-In order to plex to access to media downloaded by qbittorent we need to share a pv. However, despite the fact that kubernetes implement multiple access to a pv[1], cloud provider ovh does not provide multiple mount of a pv to multiple node[2].
+In order for plex to access the media uploaded by qbittorent, they must share a pv. However, despite the fact that kubernetes specifies multiple access to a pv[1](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes), Ovh does not implement multiple mounting on multiple nodes[2](https://docs.ovh.com/au/en/kubernetes/setting-up-a-persistent-volume/#access-modes].
 
-[1] https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes
-[2] https://docs.ovh.com/au/en/kubernetes/setting-up-a-persistent-volume/#access-modes
-
-## Register plex server
+## Register plex server :link: 
 
 There is two ways of doing it :
-- Use a claim (/!\ A claim is only valid during 4 minutes)[1]
-- Go to your plex host and login[2]
+- Use a claim (/!\ A claim is only valid during 4 minutes)[1](https://www.plex.tv/claim/).
+- Go to your plex host and login[2](https://support.plex.tv/articles/200264746-quick-start-step-by-step-guides/).
 
 If you use the second option, the configuration of the server claim token in the table is not necessary.
 
-[1] https://www.plex.tv/claim/
-[2] https://support.plex.tv/articles/200264746-quick-start-step-by-step-guides/
-
-## Value
+## Value :notebook_with_decorative_cover: 
 
 ### Qbittorent
 
 | Value                                | Definition                                      | Default                      |
 |--------------------------------------|-------------------------------------------------|------------------------------|
-| qbittorent.secrets.PLEX_CLAIM        | Qbittorent server claim                         | ""                           |
 | qbittorent.image                     | Qbittorent server docker image                  | linuxserver/qbittorent:4.5.1 |
 | qbittorent.config_folder.size        | Size of the qbittorent config folder            | 3Gi                          |
 | qbittorent.downloads_folder.size     | Size of the qbittorent download folder          | 3Gi                          |
