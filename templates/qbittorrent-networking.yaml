@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-qbittorrent
+  labels:
+    app: plex-qbittorrent
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: plex-qbittorrent
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+      protocol: TCP
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Release.Name }}-qbittorrent
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`{{ required "A valid qbittorent host is required!" .Values.qbittorrent.host }}`)
+      kind: Rule
+      services:
+        - name: {{ .Release.Name }}-qbittorrent
+          port: 8080
+      {{- if .Values.qbittorrent.middlewares }}
+      middlewares:
+      {{- range $v := .Values.qbittorrent.middlewares }}
+        - name: {{ $v }}
+      {{- end }}
+      {{- end }}
+  tls:
+    certResolver: letsencrypt
