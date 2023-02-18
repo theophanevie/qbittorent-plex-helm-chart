@@ -1,8 +1,15 @@
-# qbittorent-plex-helm-chart
+# qbittorent-plex
 
 A helm chart to deploy qbittorrent and plex.
 
 :warning: This helm chart assumes that you have configured traefik[[1]](https://traefik.io/) in your cluster.
+
+## How to use
+
+```shell
+$ helm repo add qbittorent-plex https://theophanevie.github.io/qbittorent-plex-helm-chart/
+```
+Chart name is `qbittorent-plex`. Enjoy ! :rocket:
 
 ## Why deploy this in a kubernetes cluster ? :sunglasses:
 
@@ -54,8 +61,3 @@ If you use the second option, the configuration of the server claim token in the
 | plex.secrets                   | Variables to be injected into the container env | {}                      |
 | plex.secrets.PLEX_CLAIM        | Plex server claim                               | ""                      |
 | plex.mmiddlewares              | List of traefik middlewares to use              | []                      |
-
-
-### Hosting
-
-This chart will soon be hosted in a public repository (curently working on it).
